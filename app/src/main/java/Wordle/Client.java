@@ -20,6 +20,12 @@ public class Client {
     public static String getPosition(String w, String g ) {
         String position = ""; // formated output string
         
+        // Declaring the background colors
+        final String RESET = "\u001B[0m";
+        final String GREEN = "\u001B[42m";
+        final String YELLOW = "\u001B[43m";
+        final String GREY = "\u001B[100m";
+        
         // Covert the strings to arrays
         char[] guessChars = g.toCharArray();
         char[] wordChars = w.toCharArray();
@@ -31,16 +37,17 @@ public class Client {
             if (w.indexOf(guessChars[i]) > -1) {
                 
                 if (guessChars[j] == wordChars[j] ) {
-                    position = position + guessChars[i] + " ";
+                    position = position + GREEN + guessChars[i] + RESET + " ";
                 } else {
-                    position = position + Character.toLowerCase(guessChars[i]) + " ";
+                    position = position + YELLOW + guessChars[i] + RESET + " ";
                 }
             }
             else {
-                    position = position + "_ ";
+                    position = position + GREY + guessChars[i] + RESET + " ";
                         }    
                 
             j++;
+
             
         }
        
