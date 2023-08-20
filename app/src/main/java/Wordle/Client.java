@@ -1,6 +1,8 @@
 
 package Wordle;
 
+import java.util.List;
+
 
 /**
  * Client for Word game
@@ -10,7 +12,10 @@ package Wordle;
 public class Client {
     
        
-    // Method to determine the position of the guess letter in the word.    
+    // Method to determine the position of the guess letter in the word. 
+    // Returns a formated string with _ letter not in word, 
+    // lowercase letter in word but in a different location
+    // Uppercase letter letter in in correct position
     
     public static String getPosition(String w, String g ) {
         String position = ""; // formated output string
@@ -41,7 +46,7 @@ public class Client {
        
         return position; 
     }
-    
+    // returns a different input string if first guess
     public static String getInputString(int c) {
         String inputString ;
         
@@ -55,6 +60,7 @@ public class Client {
         
     }
     
+    // Returns a formated end of game string depending on outcome.
     public static String getEndOfGame(boolean o, String w, int c){
         String outputString;
         
@@ -69,8 +75,9 @@ public class Client {
         
         return outputString;
     } 
-    
-    public static boolean checkLetters(String g) {
+    // method checks the validity of the guess by return true if guess is valid otherwise false
+    // checks message length, is not null or empty, has only alabet letters, and is in the wordlist.
+    public static boolean checkLetters(String g, List<String> wl) {
         // Return false if string is null or empty
         if (g == null || g.equals("")) {
             return false;            
@@ -78,6 +85,12 @@ public class Client {
         
         // return false if < 5 characters
         if (g.length() < 5) {
+            return false;
+        }
+        
+        // return false if guess not in word list
+        if (!wl.contains(g.toUpperCase())) {
+            System.out.println("Guess is not in the word list");
             return false;
         }
         

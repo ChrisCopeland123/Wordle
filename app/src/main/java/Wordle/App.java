@@ -36,12 +36,14 @@ public class App {
     System.out.println(Client.getInputString(counter));
     input = keyboard.nextLine();
     
-    // Check if guess is 5 letters
-    if (Client.checkLetters(input)) {
+    // Check if guess is a valid guess
+    
+    if (Client.checkLetters(input, wordlist)) {
     // Change guess to uppercase    
     guess = input.toUpperCase();
     
     System.out.println(guess);
+    
     // get the position string
     System.out.println(Client.getPosition(word, guess));
     
