@@ -2,6 +2,7 @@
 package Wordle;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -17,20 +18,22 @@ public class Client {
     // lowercase letter in word but in a different location
     // Uppercase letter letter in in correct position
     
+    // Declaring the background colors
+        public static final String RESET = "\u001B[0m";
+        public static final String GREEN = "\u001B[42m";
+        public static final String YELLOW = "\u001B[43m";
+        public static final String GREY = "\u001B[100m";
+        
+        
+    
     public static String getPosition(String w, String g ) {
-        String position = ""; // formated output string
-        
-        // Declaring the background colors
-        final String RESET = "\u001B[0m";
-        final String GREEN = "\u001B[42m";
-        final String YELLOW = "\u001B[43m";
-        final String GREY = "\u001B[100m";
-        
-        // Covert the strings to arrays
+        String position = ""; // formated output string    
+     
+        // Convert the strings to arrays
         char[] guessChars = g.toCharArray();
         char[] wordChars = w.toCharArray();
         
-        // loop counters
+        // loop counter to loop of guesss
         int j = 0; // guess position counter
         
         for (int i=0; i < g.length(); i++) {
@@ -44,11 +47,10 @@ public class Client {
             }
             else {
                     position = position + GREY + guessChars[i] + RESET + " ";
-                        }    
-                
+                        }
+        
             j++;
 
-            
         }
        
         return position; 
@@ -131,13 +133,24 @@ public class Client {
         
         return s;
     }
-        
-        
-    } 
     
-    
-    
-    
+    // print the alphabet with the associated colour for each letter
+    public static void  colouredAlphabet(List<Character> gr, List<Character> ye, List<Character> gy) {
+        char c;
+        String alphabet = "";
 
+        for (c = 'A'; c <= 'Z'; ++c) {
+            if (gr.contains(c)) {
+                alphabet = alphabet + GREEN + c + RESET + " ";
+            } else if (ye.contains(c)) {
+                alphabet = alphabet + YELLOW + c + RESET + " ";
+            } else if (gy.contains(c)) {
+                alphabet = alphabet + GREY + c + RESET + " ";
+            } else {
+                alphabet = alphabet + c + " ";
+            }
+        }
 
-
+        System.out.println(alphabet);
+    }
+}

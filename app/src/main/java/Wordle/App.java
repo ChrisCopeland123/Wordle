@@ -4,9 +4,15 @@
 package Wordle;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 
 public class App {
+
+    // List to be used to print a colored alphabet
+    public static List<Character> greenLetters = new ArrayList<>();
+    public static List<Character> yellowLetters = new ArrayList<>();
+    public static List<Character> greyLetters = new ArrayList<>();
     
     public String getGreeting() {
         return "Wecome to Wordle"; 
@@ -46,6 +52,9 @@ public class App {
     
     // get the position string
     System.out.println(Client.getPosition(word, guess));
+
+    // print alphabet
+    Client.colouredAlphabet(greenLetters, yellowLetters, greyLetters);
     
     // update counter and outcome
     counter ++;
