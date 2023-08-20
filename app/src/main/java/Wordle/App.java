@@ -8,7 +8,7 @@ import java.util.List;
 
 public class App {
     
-    public static String getGreeting() {
+    public String getGreeting() {
         return "Wecome to Wordle"; 
     }
     
@@ -23,7 +23,7 @@ public class App {
         Scanner keyboard = new Scanner(System.in);
         
      // Print the target word and Header
-     System.out.println(getGreeting());
+     System.out.println(new App().getGreeting());
      System.out.println(word);
      System.out.println(wordlist.size());
     
