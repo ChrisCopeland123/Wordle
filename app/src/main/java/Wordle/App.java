@@ -8,9 +8,13 @@ import java.util.List;
 
 public class App {
     
+    public static String getGreeting() {
+        return "Wecome to Wordle"; 
+    }
+    
     public static void main(String[] args) {
-        Server instance = new Server();
-        List<String> wordlist = instance.readDictionary("target.txt");
+        // Server instance = new Server();
+        List<String> wordlist = new Server().readDictionary("target.txt");
         String word = Server.getRandomWord(wordlist);
         int counter = 0;
         String input;
@@ -18,8 +22,10 @@ public class App {
         boolean gameOutcome = true;
         Scanner keyboard = new Scanner(System.in);
         
-     // Print the target word
+     // Print the target word and Header
+     System.out.println(getGreeting());
      System.out.println(word);
+     System.out.println(wordlist.size());
     
     // Print game instructions
     System.out.println(Client.gameInstructions());
