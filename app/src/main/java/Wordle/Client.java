@@ -134,23 +134,5 @@ public class Client {
         return s;
     }
     
-    // print the alphabet with the associated colour for each letter
-    public static void  colouredAlphabet(List<Character> gr, List<Character> ye, List<Character> gy) {
-        char c;
-        String alphabet = "";
-
-        for (c = 'A'; c <= 'Z'; ++c) {
-            if (gr.contains(c)) {
-                alphabet = alphabet + GREEN + c + RESET + " ";
-            } else if (ye.contains(c)) {
-                alphabet = alphabet + YELLOW + c + RESET + " ";
-            } else if (gy.contains(c)) {
-                alphabet = alphabet + GREY + c + RESET + " ";
-            } else {
-                alphabet = alphabet + c + " ";
-            }
-        }
-
-        System.out.println(alphabet);
-    }
+    
 }
