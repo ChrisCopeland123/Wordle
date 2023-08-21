@@ -2,8 +2,6 @@
 package Wordle;
 
 import java.util.List;
-import java.util.ArrayList;
-
 
 /**
  * Client for Word game
