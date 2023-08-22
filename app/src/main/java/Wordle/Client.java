@@ -39,12 +39,15 @@ public class Client {
                 
                 if (guessChars[j] == wordChars[j] ) {
                     position = position + GREEN + guessChars[i] + RESET + " ";
+                    Alphabet.setGreenLetters(guessChars[j]);
                 } else {
                     position = position + YELLOW + guessChars[i] + RESET + " ";
+                    Alphabet.setYellowLeters(guessChars[j]);
                 }
             }
             else {
                     position = position + GREY + guessChars[i] + RESET + " ";
+                    Alphabet.setGreyLetters(guessChars[j]);
                         }
         
             j++;

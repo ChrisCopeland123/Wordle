@@ -40,5 +40,20 @@ public class Alphabet {
 
         return alphabet;
     }
+
+    //Method to add a green letter to the array
+    public static void setGreenLetters(char g) {
+        greenLetters.add(g);
+    }
+
+    //Method to add a yellow letter to the array
+    public static void setYellowLeters(char y) {
+        yellowLetters.add(y);
+    }
+
+    //Method to add a grey letter to the array
+    public static void setGreyLetters(char gr) {
+        greyLetters.add(gr);
+    }
     
 }
