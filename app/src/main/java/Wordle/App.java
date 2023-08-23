@@ -4,6 +4,7 @@
 package Wordle;
 
 import java.util.Scanner;
+
 import java.util.List;
 
 public class App {
@@ -26,7 +27,11 @@ public class App {
      System.out.println(new App().getGreeting());
      System.out.println(word);
      System.out.println(wordlist.size());
-    
+     
+     // Create text area
+     // new wordle_GUI();
+     new TextFrame();
+        
     // Print game instructions
     System.out.println(Client.gameInstructions());
     // Game logic    
