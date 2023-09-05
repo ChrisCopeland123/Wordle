@@ -10,48 +10,40 @@ import javax.swing.*;
  */
 public class  TextFrame extends Frame implements ActionListener  {
     
-Label l1, l2, l3;    
-TextArea area;    
-Button b;
+	JTextField tf1;
+	JTextArea ta;  
+    JButton b1,b2;  
 
 // constructor 
 		
 	public TextFrame() {
 	
 	// instantiating and setting the location of components on the frame  
-    l1 = new Label();    
-    l1.setBounds(50, 100, 100, 30);    
-    l2 = new Label();    
-    l2.setBounds(160, 100, 100, 30); 
-	l3 = new Label();
-	l3.setBounds(20, 50, 100, 30 );   
-    area = new TextArea("", 0, 0, TextArea.SCROLLBARS_NONE);    
-    area.setBounds(20, 150, 300, 100);    
-    b = new Button("Count Words");    
-    b.setBounds(20, 400, 100, 30);
-	
-	// add a quit button
-	JButton quitButton = new JButton("Quit");
-	quitButton.setBounds(150, 400, 100, 30);
-  
-	// adding ActionListener to button  
-    b.addActionListener(this); 
-	quitButton.addActionListener(this);
+	JFrame f= new JFrame();  
+	tf1=new JTextField();  
+	tf1.setBounds(50,50,150,20);  
+	// tf2=new JTextField();  
+	// tf2.setBounds(50,100,150,20);  
+	// tf3=new JTextField();  
+	// tf3.setBounds(50,150,150,20);  
+	// tf3.setEditable(false); 
 
-  
-	// adding components to frame  
-    add(l1);  
-	add(l2);
-	add(l3);  
-	add(area);  
-	add(b);
-	add(quitButton);   
-// setting the size, layout and visibility of frame  
-    setSize(400, 450);    
-    setLayout(null);    
-    setVisible(true);
+		
+	// create the buttons
+	b1=new JButton("Enter");  
+	b1.setBounds(50,200,50,50);  
+	b2=new JButton("Exit");  
+	b2.setBounds(120,200,50,50);  
+	b1.addActionListener(this);  
+	b2.addActionListener(this); 
 	
-	l3.setText("Heading");
+	// add the elemnets to the frame
+	f.add(tf1);
+	f.add(b1);f.add(b2); 
+	
+	f.setSize(610,610);  
+	f.setLayout(null);  
+	f.setVisible(true);  	
 
 	}
 
@@ -59,16 +51,18 @@ Button b;
         @Override
 	public void actionPerformed(ActionEvent e)	{
 
-		String s = e.getActionCommand();
-
-		if(s.equals("Quit")) {
-			System.exit(0);
-		} else {
-		String text = area.getText();    
-    	String words[]=text.split("\\s");    
-    	l1.setText("Words: "+words.length);    
-    	l2.setText("Characters: "+text.length());
-		}  
+		String s1=tf1.getText();  
+        // String s2=tf2.getText();  
+        // int a=Integer.parseInt(s1);  
+        // int b=Integer.parseInt(s2);  
+        // int c=0;  
+        if(e.getSource()==b1){  
+            ta.setText(s1);  
+        }else if(e.getSource()==b2){  
+            System.exit(0);  
+        }  
+        // String result=String.valueOf(c);  
+        // tf3.setText(result);  
 	}
     
 }

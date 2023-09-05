@@ -40,7 +40,12 @@ public class Client {
                 if (guessChars[j] == wordChars[j] ) {
                     position = position + GREEN + guessChars[i] + RESET + " ";
                     Alphabet.setGreenLetters(guessChars[j]);
-                } else {
+
+                } else if(position.contains(Character.toString(guessChars[j]))) {
+                    position = position + guessChars[i] + " "; 
+                }                 
+                
+                else {
                     position = position + YELLOW + guessChars[i] + RESET + " ";
                     Alphabet.setYellowLeters(guessChars[j]);
                 }

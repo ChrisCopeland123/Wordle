@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 
 // import org.apache.logging.log4j.core.jmx.Server;
 
@@ -19,13 +18,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.ServiceLoader;
 
-
-
-// Very basic attempt at just getting a window to pop up and display text
-// No polish whatsoever, nor does the game load/function at this stage
-
-public class wordle_GUI implements ActionListener {
-    JFrame frame1;
+/**
+ *
+ * @author leawo
+ */
+public class GUI implements ActionListener {
+    
+   JFrame frame1;
     JButton startbutton;
     JPanel panel;
     JLabel instructionslabel1;
@@ -41,26 +40,26 @@ public class wordle_GUI implements ActionListener {
     static final int margin = 10;
     static final int gap = 5;
     static final int wordLength = 5;
-    static final int guessMax = 6;
-
+    static final int guessMax = 6; 
+    
     // The coordinate of the top or left of a the painting area for this row/col
-    private static int top(int row) {
+    private int top(int row) {
         return margin + row * (gap + boxSize + gap);
     }
 
-    private static int left(int col) {
+    private int left(int col) {
         return margin + col * (gap + boxSize + gap);
     }
 
 
-    public wordle_GUI() {
+    public GUI() {
         //Visual logic for setting up start screen
         
         // Creates window
         JFrame frame1 = new JFrame();
         // Creates button
         JButton startbutton = new JButton("Click me to start!");
-        wordleCanvas wCanvas = new wordleCanvas();
+        wordleCanvas wCanvas = new wordleCanvas("BLANK");
         JFrame frame2 = new JFrame();
         JPanel panel2 = new JPanel();
         JTextField text = new JTextField(20);
@@ -79,7 +78,6 @@ public class wordle_GUI implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 // the input is the correct number of chars
                 input = e.getActionCommand();
-                System.out.println(input);
                 if (input.length() == 5) {
                     // so we send it to the server
                     // the logic for this needs to be implemented
@@ -88,18 +86,13 @@ public class wordle_GUI implements ActionListener {
                     // String boolValue = " " + initial;
                     // frame2.setTitle(boolValue);
                     // frame2.setTitle(input);
-
-                    // Add a word to the canvas then repaint it
-                    wCanvas.addWord(input);
-                    wCanvas.repaint();
-                    //wordleCanvas reloadedCanvas = new wordleCanvas(input);
-                    //panel2.add(reloadedCanvas);
-                    //wCanvas.setVisible(false);
-                    //frame2.pack();
-                    //frame2.revalidate();
-                    //frame2.repaint();
+                    wordleCanvas reloadedCanvas = new wordleCanvas(input);
+                    panel2.add(reloadedCanvas);
+                    wCanvas.setVisible(false);
+                    frame2.pack();
+                    frame2.revalidate();
+                    frame2.repaint();
                 }
-                text.setText("");
             }
         }); 
         startbutton.addActionListener(new ActionListener() {
@@ -157,14 +150,8 @@ public class wordle_GUI implements ActionListener {
         frame1.setVisible(true);
         frame1.setSize(new Dimension(800, 600));
         frame1.setLocationRelativeTo(null);
-        
-        
     }
-
-    
-
-
-    // In theory, clicking the start button will trigger the startgame function, which will replace start window with game
+        // In theory, clicking the start button will trigger the startgame function, which will replace start window with game
     // Currently doesn't work
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -187,37 +174,21 @@ public class wordle_GUI implements ActionListener {
         
     }
 
-    public static void main(String[] args) {
-        new wordle_GUI();
-    }
-
-
+    // public static void main(String[] args) {
+    //     new GUI();
+    // }
     
-
-    /* Canvas to draw the letters on 
+/* Canvas to draw the letters on 
      * Strongly derived froms Dots and Boxes
     */
     class wordleCanvas extends Canvas {
         final ArrayList<Box> boxes = new ArrayList<>();
-        int currentBox;
-
-        public void addWord(String word){
-            String[] chars = word.split("");
-            int charCount = chars.length;
-            if (currentBox + charCount <= boxes.size()){
-                for (int c = 0; c < charCount; c++) {
-                    boxes.get(currentBox).setLetter(chars[c]);
-                    currentBox += 1;
-                }
-            }  
-        }
-
         // A Baox contains a single guessed letter
         class Box {
             private int column;
             private int row;
             private String letter;
-            final Font font = new Font(Font.MONOSPACED.toString(), Font.BOLD, boxSize);
+            Font font = new Font(Font.MONOSPACED, Font.BOLD, boxSize);
 
             public Box(int col, int row, String letter){
                 this.column = col;
@@ -250,7 +221,7 @@ public class wordle_GUI implements ActionListener {
             /** Paints this Box including the letter */
             public void draw(Graphics2D g2d) {
                 
-                g2d.setFont(font);
+                // g2d.setFont(Box.font);
                 // Calculate the coordinates for drawing the letter
                 FontMetrics fm = g2d.getFontMetrics();
                 int y = this.rect().y + this.rect().height + ((this.rect().height - fm.getHeight()) / 2);
@@ -261,12 +232,12 @@ public class wordle_GUI implements ActionListener {
                 g2d.setColor(Color.WHITE);
                 g2d.drawRect(this.rect().x, this.rect().y, this.rect().width, this.rect().height);
                 g2d.setColor(Color.GRAY);
-                g2d.drawString(this.letter.toUpperCase(), x, y);
+                g2d.drawString(this.letter, x, y);
 
             }
         }
 
-        public wordleCanvas(){
+        public wordleCanvas(String word){
              // Size the canvas to just contain the elements
              
              int width = left(wordLength) + margin + boxSize;
@@ -275,12 +246,14 @@ public class wordle_GUI implements ActionListener {
 
              // Create records for the boxes
             
+            String[] chars = word.split("");
              for (int row = 0; row < guessMax; row++) {
                  for (int col = 0; col < wordLength; col++) {
-                     boxes.add(new Box(col, row, ""));
+                     boxes.add(new Box(col, row, chars[col]));
                  }
              }
-            
+                        
+
         }
 
         @Override public void paint(Graphics g) {
@@ -299,3 +272,6 @@ public class wordle_GUI implements ActionListener {
     }
 
 }
+
+            
+

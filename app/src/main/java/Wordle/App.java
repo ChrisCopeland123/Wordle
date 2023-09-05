@@ -29,8 +29,9 @@ public class App {
      System.out.println(wordlist.size());
      
      // Create text area
-     // new wordle_GUI();
-     new TextFrame();
+    //  new wordle_GUI();
+    //  new TextFrame();
+    // new GUI();
         
     // Print game instructions
     System.out.println(Client.gameInstructions());
